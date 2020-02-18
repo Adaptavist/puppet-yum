@@ -5,7 +5,9 @@ class yum::prerequisites {
   require yum
 
   if $yum::bool_priorities_plugin == true {
-    yum::plugin { 'priorities': }
+    if $::osfamily != 'RedHat' and $::operatingsystemmajrelease != '8' {
+      yum::plugin { 'priorities': }
+    }
   }
 #  yum::plugin { 'security': }
 
